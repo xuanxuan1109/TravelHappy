@@ -1,0 +1,1859 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>旅行快乐 · TravelHappy</title>
+    <meta name="description" content="记录旅行中的每一个美好瞬间，让快乐有迹可循" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { 
+              sans: ['-apple-system', 'SF Pro Display', 'SF Pro Text', 'system-ui', 'Inter', 'ui-sans-serif'],
+              mono: ['SF Mono', 'Monaco', 'Consolas', 'monospace']
+            },
+            colors: {
+              primary: {
+                50: '#fef7ff', 100: '#fceeff', 200: '#f8ddff', 300: '#f2bbff',
+                400: '#e879f9', 500: '#d946ef', 600: '#c026d3', 700: '#a21caf',
+                800: '#86198f', 900: '#701a75'
+              },
+              accent: {
+                50: '#fff7ed', 100: '#ffedd5', 200: '#fed7aa', 300: '#fdba74',
+                400: '#fb923c', 500: '#f97316', 600: '#ea580c', 700: '#c2410c'
+              },
+              mood: {
+                happy: '#10b981', calm: '#06b6d4', excited: '#f59e0b', love: '#ef4444', neutral: '#6b7280',
+                wonder: '#8b5cf6', peace: '#06b6d4', joy: '#f59e0b'
+              },
+              gradient: {
+                sunset: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                ocean: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                forest: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)'
+              }
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.3s ease-out',
+              'slide-up': 'slideUp 0.4s ease-out',
+              'bounce-gentle': 'bounceGentle 0.6s ease-out',
+              'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+              'float': 'float 3s ease-in-out infinite',
+              'glow': 'glow 2s ease-in-out infinite alternate',
+              'wiggle': 'wiggle 1s ease-in-out infinite'
+            },
+            keyframes: {
+              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+              slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+              bounceGentle: { '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' }, '40%': { transform: 'translateY(-8px)' }, '60%': { transform: 'translateY(-4px)' } },
+              pulseSoft: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.7' } },
+              float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-10px)' } },
+              glow: { '0%': { boxShadow: '0 0 5px rgba(217, 70, 239, 0.5)' }, '100%': { boxShadow: '0 0 20px rgba(217, 70, 239, 0.8)' } },
+              wiggle: { '0%, 100%': { transform: 'rotate(-3deg)' }, '50%': { transform: 'rotate(3deg)' } }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root { 
+        color-scheme: light; 
+        --safe-area-inset-top: env(safe-area-inset-top);
+        --safe-area-inset-bottom: env(safe-area-inset-bottom);
+      }
+      * { -webkit-tap-highlight-color: transparent; }
+      html, body { 
+        height: 100%; 
+        background: linear-gradient(135deg, #fef7ff 0%, #f8ddff 50%, #e879f9 100%);
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .glass { backdrop-filter: blur(20px) saturate(180%); }
+      .touch-feedback { transition: transform 0.1s ease-out; }
+      .touch-feedback:active { transform: scale(0.98); }
+      .swipe-item { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+      .swipe-item.swiped { transform: translateX(-80px); }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      }
+    </style>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+  </head>
+  <body class="min-h-screen text-slate-900 antialiased">
+    <!-- Safe area container -->
+    <div class="min-h-screen" style="padding-top: var(--safe-area-inset-top); padding-bottom: var(--safe-area-inset-bottom);">
+      <!-- Main app container -->
+      <div class="mx-auto max-w-sm min-h-screen bg-white shadow-2xl">
+        
+        <!-- Status bar -->
+        <div class="h-6 bg-white flex items-center justify-between px-6 text-xs font-medium text-slate-600">
+          <span>9:41</span>
+          <div class="flex items-center gap-1">
+            <div class="w-4 h-2 bg-slate-900 rounded-sm"></div>
+            <div class="w-6 h-3 border border-slate-900 rounded-sm">
+              <div class="w-4 h-2 bg-slate-900 rounded-sm m-0.5"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Header with location & weather -->
+        <header class="px-6 pt-4 pb-6 bg-gradient-to-b from-white/80 to-white/60 backdrop-blur-xl relative overflow-hidden">
+          <!-- 装饰性背景元素 -->
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-200/30 to-accent-200/30 rounded-full -translate-y-16 translate-x-16 animate-float"></div>
+          <div class="absolute top-8 left-8 w-16 h-16 bg-gradient-to-br from-mood-wonder/20 to-mood-joy/20 rounded-full animate-pulse-soft"></div>
+          
+          <div class="flex items-center justify-between mb-4 relative z-10">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-3xl bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500 flex items-center justify-center shadow-xl animate-glow">
+                <svg viewBox="0 0 24 24" class="w-6 h-6 text-white animate-bounce-gentle">
+                  <path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/>
+                </svg>
+              </div>
+              <div>
+                <h1 class="text-xl font-bold text-slate-900 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">旅行快乐</h1>
+                <div class="flex items-center gap-2 text-sm text-slate-600">
+                  <svg viewBox="0 0 24 24" class="w-4 h-4 text-primary-500">
+                    <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5z"/>
+                  </svg>
+                  <span id="current-location" class="font-medium">京都 · 日本</span>
+                  <span class="text-xs bg-primary-100 text-primary-600 px-2 py-0.5 rounded-full">进行中</span>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="flex items-center gap-1 text-sm text-slate-600 mb-1">
+                <svg viewBox="0 0 24 24" class="w-4 h-4 text-accent-500">
+                  <path fill="currentColor" d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/>
+                </svg>
+                <span id="current-weather" class="font-medium">22°C</span>
+              </div>
+              <div class="text-xs text-slate-500" id="current-time">14:30</div>
+            </div>
+          </div>
+          
+          <!-- Quick stats - 只在记录页面显示 -->
+          <div id="info-cards" class="grid grid-cols-3 gap-3 relative z-10">
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 group">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-mood-happy to-mood-joy flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="w-3 h-3 text-white">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+            </div>
+                <div class="text-xs text-slate-500 font-medium">今日花费</div>
+            </div>
+              <div class="text-xl font-bold text-slate-900 group-hover:text-primary-600 transition-colors">¥526</div>
+              <div class="text-xs text-mood-happy font-medium">比昨天 +12%</div>
+            </div>
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 group">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-mood-calm to-primary-500 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="w-3 h-3 text-white">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+          </div>
+                <div class="text-xs text-slate-500 font-medium">汇率</div>
+              </div>
+              <div class="text-xl font-bold text-slate-900 group-hover:text-mood-calm transition-colors">1¥=20円</div>
+              <div class="text-xs text-mood-calm font-medium">实时更新</div>
+            </div>
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 group">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-mood-love to-accent-500 flex items-center justify-center animate-pulse-soft">
+                  <svg viewBox="0 0 24 24" class="w-3 h-3 text-white">
+                    <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  </svg>
+                </div>
+                <div class="text-xs text-slate-500 font-medium">心情指数</div>
+              </div>
+              <div class="text-xl font-bold text-slate-900 group-hover:text-mood-love transition-colors">8.4</div>
+              <div class="text-xs text-mood-love font-medium">很愉快</div>
+          </div>
+          </div>
+        </header>
+
+
+        <!-- Record Content -->
+        <section id="panel-record" class="px-6 py-4">
+          <!-- AI智能记录 -->
+          <div class="mb-6">
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg border border-white/50">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-mood-wonder to-primary-500 flex items-center justify-center animate-pulse-soft">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5 text-white">
+                  <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-slate-900">快速记录</h3>
+                  <p class="text-sm text-slate-500">告诉我发生了什么，AI会自动帮你记录和记账</p>
+              </div>
+            </div>
+            
+              <div class="space-y-4">
+                <div class="flex gap-2">
+                  <input type="text" id="quick-input" placeholder="例如：在清水寺买了纪念品1500円，心情很好 🎌" class="flex-1 px-4 py-4 bg-slate-50 rounded-2xl border-0 text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all text-base" />
+                  <button id="quick-send-btn" class="px-6 py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-2xl touch-feedback hover:shadow-lg transition-all">
+                    <svg viewBox="0 0 24 24" class="w-6 h-6">
+                      <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+                  </button>
+              </div>
+              
+                <!-- 辅助功能按钮 -->
+              <div class="flex items-center gap-3">
+                  <button id="photo-btn" class="flex-1 flex items-center justify-center gap-2 py-3 bg-slate-100 rounded-2xl text-slate-600 touch-feedback hover:bg-slate-200 transition-colors">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5">
+                    <path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                  </svg>
+                  <span class="text-sm font-medium">拍照</span>
+                </button>
+                  <button id="voice-btn" class="flex-1 flex items-center justify-center gap-2 py-3 bg-slate-100 rounded-2xl text-slate-600 touch-feedback hover:bg-slate-200 transition-colors">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5">
+                    <path fill="currentColor" d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+                  </svg>
+                  <span class="text-sm font-medium">语音</span>
+                </button>
+                  <button id="location-btn" class="flex-1 flex items-center justify-center gap-2 py-3 bg-slate-100 rounded-2xl text-slate-600 touch-feedback hover:bg-slate-200 transition-colors">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5">
+                    <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                  <span class="text-sm font-medium">位置</span>
+                </button>
+              </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Recent expenses -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h2 class="text-lg font-semibold text-slate-900">最近记录</h2>
+              <button class="text-sm text-primary-600 touch-feedback">查看全部</button>
+            </div>
+            
+            <!-- Expense items -->
+            <div id="expense-list" class="space-y-3">
+              <!-- Sample expense item -->
+              <div class="swipe-item bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+                <div class="flex items-start gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-mood-happy/20 to-mood-happy/10 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-6 h-6 text-mood-happy">
+                      <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                      <h3 class="font-medium text-slate-900">清水寺纪念品</h3>
+                      <span class="text-lg font-semibold text-slate-900">¥58</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mb-2">在清水寺买了手作和扇，心情很好 🎌</p>
+                    <div class="flex items-center gap-2">
+                      <span class="px-2 py-1 bg-mood-happy/10 text-mood-happy text-xs rounded-lg">开心</span>
+                      <span class="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-lg">购物</span>
+                      <span class="text-xs text-slate-400">14:30</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swipe-item bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+                <div class="flex items-start gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-mood-calm/20 to-mood-calm/10 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-6 h-6 text-mood-calm">
+                      <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                      <h3 class="font-medium text-slate-900">%Arabica 咖啡</h3>
+                      <span class="text-lg font-semibold text-slate-900">¥58</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mb-2">阳光穿过庭院，拿铁入口是秋天的味道 ☕️</p>
+                    <div class="flex items-center gap-2">
+                      <span class="px-2 py-1 bg-mood-calm/10 text-mood-calm text-xs rounded-lg">放松</span>
+                      <span class="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-lg">餐饮</span>
+                      <span class="text-xs text-slate-400">10:12</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats Content -->
+        <section id="panel-stats" class="px-6 py-4 hidden">
+          <div class="space-y-6">
+            <!-- Time period selector -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/50">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-slate-900">数据统计</h3>
+                <div class="flex bg-slate-100 rounded-xl p-1">
+                  <button id="stats-today" class="px-3 py-1 text-sm font-medium text-white bg-primary-500 rounded-lg transition-all">今日</button>
+                  <button id="stats-total" class="px-3 py-1 text-sm font-medium text-slate-600 transition-all">总计</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spending chart -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/50">
+              <h3 class="text-lg font-semibold text-slate-900 mb-4" id="stats-title">今日消费分析</h3>
+              <div class="flex items-center justify-center mb-4">
+                <div class="relative w-32 h-32">
+                  <svg viewBox="0 0 120 120" class="w-32 h-32 transform -rotate-90">
+                    <circle cx="60" cy="60" r="44" stroke="#e5e7eb" stroke-width="8" fill="none" />
+                    <circle cx="60" cy="60" r="44" stroke="#10b981" stroke-width="8" fill="none" stroke-dasharray="138 276" stroke-linecap="round" />
+                    <circle cx="60" cy="60" r="44" stroke="#f59e0b" stroke-width="8" fill="none" stroke-dasharray="92 276" stroke-dashoffset="-138" stroke-linecap="round" />
+                    <circle cx="60" cy="60" r="44" stroke="#06b6d4" stroke-width="8" fill="none" stroke-dasharray="46 276" stroke-dashoffset="-230" stroke-linecap="round" />
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-slate-900">¥526</div>
+                      <div class="text-xs text-slate-500">今日总计</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-3 text-center">
+                <div>
+                  <div class="w-3 h-3 bg-mood-happy rounded-full mx-auto mb-1"></div>
+                  <div class="text-xs text-slate-600">餐饮 42%</div>
+                </div>
+                <div>
+                  <div class="w-3 h-3 bg-mood-excited rounded-full mx-auto mb-1"></div>
+                  <div class="text-xs text-slate-600">购物 28%</div>
+                </div>
+                <div>
+                  <div class="w-3 h-3 bg-mood-calm rounded-full mx-auto mb-1"></div>
+                  <div class="text-xs text-slate-600">交通 16%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mood chart -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/50">
+              <h3 class="text-lg font-semibold text-slate-900 mb-4" id="mood-title">今日心情曲线</h3>
+              <div class="h-32 bg-gradient-to-r from-mood-calm/20 via-mood-happy/20 to-mood-excited/20 rounded-2xl flex items-end justify-between p-4" id="mood-chart">
+                <div class="flex flex-col items-center gap-2">
+                  <div class="w-3 h-8 bg-mood-calm rounded-full" style="height: 32px;"></div>
+                  <span class="text-xs text-slate-500">早上</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                  <div class="w-3 h-12 bg-mood-happy rounded-full" style="height: 48px;"></div>
+                  <span class="text-xs text-slate-500">中午</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                  <div class="w-3 h-16 bg-mood-excited rounded-full" style="height: 64px;"></div>
+                  <span class="text-xs text-slate-500">下午</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                  <div class="w-3 h-10 bg-mood-happy rounded-full" style="height: 40px;"></div>
+                  <span class="text-xs text-slate-500">晚上</span>
+                </div>
+              </div>
+              <div class="mt-4 grid grid-cols-4 gap-2 text-center">
+                <div>
+                  <div class="text-sm font-medium text-slate-900">7.2</div>
+                  <div class="text-xs text-slate-500">早上</div>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-slate-900">8.1</div>
+                  <div class="text-xs text-slate-500">中午</div>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-slate-900">9.2</div>
+                  <div class="text-xs text-slate-500">下午</div>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-slate-900">8.5</div>
+                  <div class="text-xs text-slate-500">晚上</div>
+                </div>
+              </div>
+              <div class="mt-4 text-center">
+                <div class="text-sm text-slate-600">平均心情指数</div>
+                <div class="text-2xl font-bold text-primary-600">8.4</div>
+              </div>
+            </div>
+
+            <!-- Budget progress -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/50">
+              <h3 class="text-lg font-semibold text-slate-900 mb-4" id="budget-title">预算进度</h3>
+              <div class="space-y-3">
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="text-slate-600">今日预算</span>
+                    <span class="text-slate-900">¥526 / ¥800</span>
+                  </div>
+                  <div class="w-full bg-slate-200 rounded-full h-2">
+                    <div class="bg-primary-500 h-2 rounded-full" style="width: 66%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="text-slate-600">总预算</span>
+                    <span class="text-slate-900">¥2,186 / ¥3,000</span>
+                  </div>
+                  <div class="w-full bg-slate-200 rounded-full h-2">
+                    <div class="bg-accent-500 h-2 rounded-full" style="width: 73%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Summary Content -->
+        <section id="panel-summary" class="px-6 py-4 hidden">
+          <div class="space-y-6">
+            <!-- Trip overview -->
+            <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl p-6 text-white">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-bold">京都之旅</h3>
+                  <p class="text-primary-100">3天2夜 · 2024年10月</p>
+                </div>
+                <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6">
+                    <path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                  <div class="text-2xl font-bold">¥2,186</div>
+                  <div class="text-sm text-primary-100">总花费</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold">8.4</div>
+                  <div class="text-sm text-primary-100">心情指数</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold">15</div>
+                  <div class="text-sm text-primary-100">记录数</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 旅行记忆图 -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg border border-white/50">
+              <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-mood-wonder to-primary-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">旅行记忆图</h3>
+                <p class="text-slate-600">点击查看每日的精彩瞬间</p>
+              </div>
+              
+              <!-- 记忆图容器 -->
+              <div class="relative bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-6 overflow-hidden">
+                <!-- 背景装饰 -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-primary-100/30 rounded-full -translate-y-16 translate-x-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-accent-100/30 rounded-full translate-y-12 -translate-x-12"></div>
+                
+                <!-- 旅行路线图 -->
+                <div class="relative z-10">
+                  <!-- 路线连接线 -->
+                  <svg class="absolute inset-0 w-full h-full" viewBox="0 0 300 200">
+                    <path d="M50 50 Q150 30 250 80 Q200 120 150 150 Q100 180 50 160" 
+                          stroke="#0ea5e9" stroke-width="3" fill="none" stroke-dasharray="5,5" opacity="0.6"/>
+                  </svg>
+                  
+                  <!-- 日期节点 -->
+                  <div class="flex justify-between items-center relative z-20">
+                    <!-- 第一天 -->
+                    <div class="memory-day cursor-pointer group" data-day="1">
+                      <div class="w-12 h-12 bg-gradient-to-br from-mood-happy to-mood-joy rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <span class="text-white font-bold text-sm">1</span>
+                      </div>
+                      <div class="text-center mt-2">
+                        <div class="text-xs font-medium text-slate-700">10/12</div>
+                        <div class="text-xs text-slate-500">清水寺</div>
+                      </div>
+                    </div>
+                    
+                    <!-- 第二天 -->
+                    <div class="memory-day cursor-pointer group" data-day="2">
+                      <div class="w-12 h-12 bg-gradient-to-br from-mood-calm to-primary-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <span class="text-white font-bold text-sm">2</span>
+                      </div>
+                      <div class="text-center mt-2">
+                        <div class="text-xs font-medium text-slate-700">10/13</div>
+                        <div class="text-xs text-slate-500">祇园</div>
+                      </div>
+                    </div>
+                    
+                    <!-- 第三天 -->
+                    <div class="memory-day cursor-pointer group" data-day="3">
+                      <div class="w-12 h-12 bg-gradient-to-br from-mood-love to-accent-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <span class="text-white font-bold text-sm">3</span>
+                      </div>
+                      <div class="text-center mt-2">
+                        <div class="text-xs font-medium text-slate-700">10/14</div>
+                        <div class="text-xs text-slate-500">金阁寺</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- 底部统计 -->
+                  <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <div class="text-lg font-bold text-slate-900">3</div>
+                      <div class="text-xs text-slate-500">旅行天数</div>
+                    </div>
+                    <div>
+                      <div class="text-lg font-bold text-slate-900">15</div>
+                      <div class="text-xs text-slate-500">精彩瞬间</div>
+                    </div>
+                    <div>
+                      <div class="text-lg font-bold text-slate-900">8.4</div>
+                      <div class="text-xs text-slate-500">平均心情</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Highlights -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+              <h3 class="text-lg font-semibold text-slate-900 mb-4">旅行亮点</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+                  <div class="w-10 h-10 rounded-xl bg-mood-love/20 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 text-mood-love">
+                      <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-medium text-slate-900">最心动时刻</div>
+                    <div class="text-sm text-slate-500">清水寺傍晚 · 心情指数 9.5</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+                  <div class="w-10 h-10 rounded-xl bg-mood-excited/20 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 text-mood-excited">
+                      <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-medium text-slate-900">最大消费</div>
+                    <div class="text-sm text-slate-500">和服体验 · ¥8,000</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+                  <div class="w-10 h-10 rounded-xl bg-mood-happy/20 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 text-mood-happy">
+                      <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-medium text-slate-900">节省预算</div>
+                    <div class="text-sm text-slate-500">比计划少花 ¥814</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI 旅行总结 -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+              <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-mood-wonder to-primary-500 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="w-3 h-3 text-white">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </div>
+                AI 旅行总结
+              </h3>
+              <div id="ai-summary-content" class="space-y-3">
+                <div class="p-3 bg-gradient-to-r from-primary-50 to-accent-50 rounded-xl">
+                  <p class="text-sm text-slate-700">这次京都之旅充满了惊喜！你在清水寺的时光特别美好，心情指数达到了9.5分。整体消费控制得很好，比预算节省了814元。</p>
+                </div>
+                <div class="p-3 bg-gradient-to-r from-mood-happy/10 to-mood-joy/10 rounded-xl">
+                  <p class="text-sm text-slate-700">最难忘的瞬间是在%Arabica咖啡店，阳光穿过庭院的宁静时光。购物方面，和服体验是最大的消费，但绝对值得！</p>
+                </div>
+              </div>
+              <button id="regenerate-ai-btn" class="w-full mt-3 py-2 text-primary-600 text-sm font-medium touch-feedback">
+                重新生成总结
+              </button>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="grid grid-cols-2 gap-3">
+              <button id="generate-travel-report-btn" class="bg-gradient-to-r from-primary-500 to-accent-500 text-white py-4 rounded-2xl font-medium touch-feedback hover:shadow-lg transition-all">
+                <div class="flex items-center justify-center gap-2">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  生成报告
+                </div>
+              </button>
+              <button id="share-trip-btn" class="bg-gradient-to-r from-mood-happy to-mood-joy text-white py-4 rounded-2xl font-medium touch-feedback hover:shadow-lg transition-all">
+                <div class="flex items-center justify-center gap-2">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5">
+                    <path fill="currentColor" d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"/>
+                  </svg>
+                  分享快乐
+                </div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profile Content -->
+        <section id="panel-profile" class="px-6 py-4 hidden">
+          <div class="space-y-6">
+            <!-- User Profile -->
+            <div class="bg-gradient-to-br from-primary-500 to-accent-500 rounded-3xl p-6 text-white">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 bg-white/20 rounded-3xl flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="w-8 h-8">
+                    <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold">旅行达人</h3>
+                  <p class="text-primary-100">记录美好，分享快乐</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                  <div class="text-2xl font-bold">3</div>
+                  <div class="text-sm text-primary-100">旅行次数</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold">25</div>
+                  <div class="text-sm text-primary-100">记录数</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold">8.4</div>
+                  <div class="text-sm text-primary-100">平均心情</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- My Trips -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-lg border border-white/50">
+              <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-mood-wonder to-primary-500 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="w-3 h-3 text-white">
+                    <path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/>
+                  </svg>
+                </div>
+                我的旅行
+              </h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl">
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-6 h-6 text-primary-600">
+                      <path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="font-medium text-slate-900">京都赏樱之旅</div>
+                    <div class="text-sm text-slate-500">2024年10月 · 进行中</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm font-semibold text-slate-900">¥2,186</div>
+                    <div class="text-xs text-slate-500">已花费</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl">
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mood-happy/20 to-mood-joy/20 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-6 h-6 text-mood-happy">
+                      <path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="font-medium text-slate-900">首尔购物游</div>
+                    <div class="text-sm text-slate-500">2024年9月 · 已完成</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm font-semibold text-slate-900">¥1,890</div>
+                    <div class="text-xs text-slate-500">总花费</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl">
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mood-calm/20 to-primary-500/20 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-6 h-6 text-mood-calm">
+                      <path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <div class="font-medium text-slate-900">巴厘岛度假</div>
+                    <div class="text-sm text-slate-500">2024年11月 · 计划中</div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-sm font-semibold text-slate-900">¥0</div>
+                    <div class="text-xs text-slate-500">预算 ¥4,000</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Settings -->
+          </div>
+        </section>
+
+        <!-- Bottom navigation -->
+        <nav class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm bg-white/80 backdrop-blur-xl border-t border-slate-200 px-6 py-2" style="padding-bottom: calc(0.5rem + var(--safe-area-inset-bottom));">
+          <div class="flex justify-around items-center">
+            <button id="nav-record" class="flex flex-col items-center gap-1 py-2 touch-feedback">
+              <div class="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-4 h-4 text-white">
+                  <path fill="currentColor" d="M12 3l9 8h-3v8h-5v-5H11v5H6v-8H3z"/>
+                </svg>
+              </div>
+              <span class="text-xs text-primary-600 font-medium">记录</span>
+            </button>
+            <button id="nav-stats" class="flex flex-col items-center gap-1 py-2 touch-feedback">
+              <div class="w-6 h-6 text-slate-400">
+                <svg viewBox="0 0 24 24" class="w-6 h-6">
+                <path fill="currentColor" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+              </svg>
+              </div>
+              <span class="text-xs text-slate-400">统计</span>
+            </button>
+            <!-- 新建旅行按钮 -->
+            <button id="new-trip-btn" class="w-14 h-14 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center shadow-lg touch-feedback hover:shadow-xl transition-all duration-300 animate-glow -mt-2">
+              <svg viewBox="0 0 24 24" class="w-7 h-7 text-white">
+                <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+              </svg>
+            </button>
+            <button id="nav-summary" class="flex flex-col items-center gap-1 py-2 touch-feedback">
+              <div class="w-6 h-6 text-slate-400">
+                <svg viewBox="0 0 24 24" class="w-6 h-6">
+                <path fill="currentColor" d="M5 4h14v2H5zm0 4h14v2H5zm0 4h14v2H5zm0 4h9v2H5z"/>
+              </svg>
+              </div>
+              <span class="text-xs text-slate-400">总结</span>
+            </button>
+            <button id="nav-profile" class="flex flex-col items-center gap-1 py-2 touch-feedback">
+              <div class="w-6 h-6 text-slate-400">
+                <svg viewBox="0 0 24 24" class="w-6 h-6">
+                <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              </div>
+              <span class="text-xs text-slate-400">我的</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Add bottom padding for navigation -->
+        <div class="h-20"></div>
+      </div>
+    </div>
+
+    <script>
+      // Tab navigation
+      (function() {
+        const tabs = document.querySelectorAll('input[name="tab"]');
+        const indicator = document.getElementById('tab-indicator');
+        
+        function updateIndicator() {
+          const activeTab = document.querySelector('input[name="tab"]:checked');
+          if (activeTab) {
+            const index = Array.from(tabs).indexOf(activeTab);
+            indicator.style.transform = `translateX(${index * 100}%)`;
+          }
+        }
+        
+        tabs.forEach(tab => {
+          tab.addEventListener('change', updateIndicator);
+        });
+        
+        updateIndicator();
+      })();
+
+      // 辅助功能 - 拍照、语音、位置
+      (function() {
+        const photoBtn = document.getElementById('photo-btn');
+        const voiceBtn = document.getElementById('voice-btn');
+        const locationBtn = document.getElementById('location-btn');
+        const quickInput = document.getElementById('quick-input');
+        
+        // 拍照功能
+        photoBtn.addEventListener('click', () => {
+          photoBtn.classList.add('bg-primary-500', 'text-white');
+          photoBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span class="text-sm font-medium">已拍照</span>';
+          
+          setTimeout(() => {
+            photoBtn.classList.remove('bg-primary-500', 'text-white');
+            photoBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span class="text-sm font-medium">拍照</span>';
+          }, 1500);
+        });
+        
+        // 语音功能
+        voiceBtn.addEventListener('click', () => {
+          voiceBtn.classList.add('bg-primary-500', 'text-white');
+          voiceBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5 animate-pulse"><path fill="currentColor" d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg><span class="text-sm font-medium">录音中...</span>';
+          
+          setTimeout(() => {
+            voiceBtn.classList.remove('bg-primary-500', 'text-white');
+            voiceBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg><span class="text-sm font-medium">语音</span>';
+            // 模拟语音识别结果
+            quickInput.value = '在清水寺买了纪念品，心情很好 🎌';
+          }, 2000);
+        });
+        
+        // 位置功能
+        locationBtn.addEventListener('click', () => {
+          locationBtn.classList.add('bg-primary-500', 'text-white');
+          locationBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><span class="text-sm font-medium">定位中</span>';
+          
+          setTimeout(() => {
+            locationBtn.classList.remove('bg-primary-500', 'text-white');
+            locationBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><span class="text-sm font-medium">位置</span>';
+            // 模拟位置获取结果
+            if (quickInput.value) {
+              quickInput.value += ' 在清水寺';
+            } else {
+              quickInput.value = '在清水寺';
+            }
+          }, 1000);
+        });
+      })();
+
+      // Update time
+      (function() {
+        const timeElement = document.getElementById('current-time');
+        
+        function updateTime() {
+          const now = new Date();
+          const time = now.toLocaleTimeString('zh-CN', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: false 
+          });
+          timeElement.textContent = time;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000); // Update every minute
+      })();
+
+      // 新建旅行功能
+      (function() {
+        const newTripBtn = document.getElementById('new-trip-btn');
+        
+        newTripBtn.addEventListener('click', () => {
+          window.location.href = 'new-trip.html';
+        });
+      })();
+
+      // 一句话快速输入功能
+      (function() {
+        const quickInput = document.getElementById('quick-input');
+        const quickSendBtn = document.getElementById('quick-send-btn');
+        const expenseList = document.getElementById('expense-list');
+        
+        function sendQuickInput() {
+          const text = quickInput.value.trim();
+          if (!text) return;
+          
+          // 模拟AI解析
+          const aiAnalysis = analyzeQuickInput(text);
+          
+          // 创建新的记录项
+            const newExpense = document.createElement('div');
+          newExpense.className = 'swipe-item bg-white/80 backdrop-blur-sm rounded-3xl p-4 shadow-lg border border-white/50 animate-slide-up';
+          
+          // 根据是否为记账类选择不同的图标和样式
+          const iconSvg = aiAnalysis.isExpense ? 
+            // 记账类图标 - 钱包/金钱
+            `<svg viewBox="0 0 24 24" class="w-6 h-6 text-${aiAnalysis.moodColor}">
+              <path fill="currentColor" d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+            </svg>` :
+            // 记录类图标 - 记事本/心情
+            `<svg viewBox="0 0 24 24" class="w-6 h-6 text-${aiAnalysis.moodColor}">
+              <path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+            </svg>`;
+          
+          const typeLabel = aiAnalysis.isExpense ? '记账' : '记录';
+          const typeColor = aiAnalysis.isExpense ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600';
+          
+            newExpense.innerHTML = `
+              <div class="flex items-start gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-${aiAnalysis.moodColor}/20 to-${aiAnalysis.moodColor}/10 flex items-center justify-center">
+                ${iconSvg}
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-1">
+                  <h3 class="font-medium text-slate-900">${aiAnalysis.title}</h3>
+                  ${aiAnalysis.isExpense ? `<span class="text-lg font-semibold text-slate-900">${aiAnalysis.amount}</span>` : ''}
+                  </div>
+                <p class="text-sm text-slate-500 mb-2">${text}</p>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-1 ${typeColor} text-xs rounded-lg">${typeLabel}</span>
+                  <span class="px-2 py-1 bg-${aiAnalysis.moodColor}/10 text-${aiAnalysis.moodColor} text-xs rounded-lg">${aiAnalysis.moodText}</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-lg">${aiAnalysis.category}</span>
+                  ${aiAnalysis.location !== '未知地点' ? `<span class="px-2 py-1 bg-primary-100 text-primary-600 text-xs rounded-lg">${aiAnalysis.location}</span>` : ''}
+                    <span class="text-xs text-slate-400">刚刚</span>
+                  </div>
+                <div class="mt-2 flex items-center gap-2">
+                  <div class="flex items-center gap-1">
+                    <svg viewBox="0 0 24 24" class="w-3 h-3 text-${aiAnalysis.moodColor}">
+                      <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span class="text-xs text-slate-500">心情指数 ${aiAnalysis.moodScore}</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <svg viewBox="0 0 24 24" class="w-3 h-3 text-slate-400">
+                      <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span class="text-xs text-slate-500">AI识别</span>
+                  </div>
+                </div>
+                </div>
+              </div>
+            `;
+            
+            expenseList.insertBefore(newExpense, expenseList.firstChild);
+            
+          // 清空输入框
+          quickInput.value = '';
+          
+          // 显示成功反馈
+          quickSendBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>';
+          quickSendBtn.classList.add('bg-mood-happy');
+            setTimeout(() => {
+            quickSendBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
+            quickSendBtn.classList.remove('bg-mood-happy');
+            }, 1500);
+        }
+        
+        quickSendBtn.addEventListener('click', sendQuickInput);
+        quickInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            sendQuickInput();
+          }
+        });
+        
+        // 增强的AI分析函数
+        function analyzeQuickInput(text) {
+          // 金额识别 - 支持多种货币和格式
+          const amountPatterns = [
+            /(\d+)[元]/g,
+            /(\d+)[円]/g,
+            /(\d+)[¥]/g,
+            /(\d+)[$]/g,
+            /(\d+)[€]/g,
+            /(\d+)[₩]/g,
+            /花了(\d+)/g,
+            /消费(\d+)/g,
+            /(\d+)块/g,
+            /(\d+)元/g
+          ];
+          
+          let amount = '¥0';
+          let currency = 'CNY';
+          
+          for (const pattern of amountPatterns) {
+            const match = text.match(pattern);
+            if (match) {
+              const num = match[1] || match[0].replace(/[^\d]/g, '');
+              if (text.includes('円') || text.includes('JPY')) {
+                amount = `¥${Math.round(num * 0.05)}`; // 日元转人民币
+                currency = 'JPY';
+              } else if (text.includes('$') || text.includes('USD')) {
+                amount = `¥${Math.round(num * 7.2)}`; // 美元转人民币
+                currency = 'USD';
+              } else if (text.includes('€') || text.includes('EUR')) {
+                amount = `¥${Math.round(num * 7.8)}`; // 欧元转人民币
+                currency = 'EUR';
+              } else if (text.includes('₩') || text.includes('KRW')) {
+                amount = `¥${Math.round(num * 0.005)}`; // 韩元转人民币
+                currency = 'KRW';
+              } else {
+                amount = `¥${num}`;
+                currency = 'CNY';
+              }
+              break;
+            }
+          }
+          
+          // 心情识别
+          let mood = 'neutral';
+          let moodColor = 'mood-neutral';
+          let moodText = '平静';
+          let moodScore = 7.0;
+          
+          const moodKeywords = {
+            'happy': ['开心', '高兴', '快乐', '兴奋', '很好', '棒', '😊', '😄', '🎉', '🎌', '❤️'],
+            'excited': ['激动', '兴奋', '刺激', '太棒了', 'amazing', 'wow', '😍', '🤩', '🔥'],
+            'calm': ['平静', '放松', '安静', '舒服', '惬意', '☕️', '😌', '🌸', '🌿'],
+            'love': ['喜欢', '爱', '心动', '美', '漂亮', '💕', '💖', '😘', '💝'],
+            'wonder': ['神奇', '震撼', '惊叹', 'amazing', 'wow', '😮', '✨', '🌟'],
+            'peace': ['宁静', '安详', '平和', '😇', '🕊️', '🌅', '🌙']
+          };
+          
+          for (const [moodType, keywords] of Object.entries(moodKeywords)) {
+            if (keywords.some(keyword => text.includes(keyword))) {
+              mood = moodType;
+              moodColor = `mood-${moodType}`;
+              moodText = {
+                'happy': '开心',
+                'excited': '兴奋',
+                'calm': '放松',
+                'love': '心动',
+                'wonder': '惊叹',
+                'peace': '宁静'
+              }[moodType];
+              moodScore = {
+                'happy': 8.5,
+                'excited': 9.0,
+                'calm': 8.0,
+                'love': 9.5,
+                'wonder': 9.2,
+                'peace': 8.8
+              }[moodType];
+              break;
+            }
+          }
+          
+          // 分类识别
+          let category = '其他';
+          let title = '新记录';
+          
+          const categoryKeywords = {
+            'food': ['吃', '喝', '咖啡', '茶', '饭', '面', '菜', '餐厅', 'cafe', '☕️', '🍜', '🍱', '🍣', '🍰'],
+            'shopping': ['买', '购物', '纪念品', '礼物', '衣服', '化妆品', '🛍️', '💄', '👗', '🎁'],
+            'transport': ['坐', '乘', '地铁', '公交', '出租车', '飞机', '火车', '🚇', '🚌', '✈️', '🚄'],
+            'attraction': ['参观', '游览', '景点', '寺庙', '公园', '博物馆', '🏛️', '⛩️', '🌸', '🎌'],
+            'accommodation': ['住', '酒店', '旅馆', '民宿', '🏨', '🏠', '🛏️'],
+            'entertainment': ['玩', '娱乐', '电影', '游戏', '🎬', '🎮', '🎪', '🎭']
+          };
+          
+          for (const [cat, keywords] of Object.entries(categoryKeywords)) {
+            if (keywords.some(keyword => text.includes(keyword))) {
+              category = cat;
+              title = {
+                'food': '美食体验',
+                'shopping': '购物记录',
+                'transport': '交通出行',
+                'attraction': '景点游览',
+                'accommodation': '住宿体验',
+                'entertainment': '娱乐活动'
+              }[cat];
+              break;
+            }
+          }
+          
+          // 地点识别
+          let location = '';
+          const locationKeywords = ['在', '到', '去了', '来到'];
+          const locationMatch = text.match(new RegExp(`(${locationKeywords.join('|')})([^，,。！!？?]+)`));
+          if (locationMatch) {
+            location = locationMatch[2].trim();
+          }
+          
+          // 判断是否为记账类输入（有金额）
+          const isExpense = amount !== '¥0';
+          
+          return { 
+            amount, 
+            currency,
+            mood, 
+            moodColor, 
+            moodText, 
+            moodScore,
+            category, 
+            title,
+            location: location || '未知地点',
+            isExpense
+          };
+        }
+      })();
+
+      // 统计页面功能
+      (function() {
+        const statsTodayBtn = document.getElementById('stats-today');
+        const statsTotalBtn = document.getElementById('stats-total');
+        const statsTitle = document.getElementById('stats-title');
+        const moodTitle = document.getElementById('mood-title');
+        const budgetTitle = document.getElementById('budget-title');
+        
+        // 今日数据
+        const todayData = {
+          total: 526,
+          food: 42,
+          shopping: 28,
+          transport: 16,
+          mood: 8.4,
+          dailyBudget: 800,
+          totalBudget: 3000,
+          spent: 2186
+        };
+        
+        // 总计数据
+        const totalData = {
+          total: 2186,
+          food: 45,
+          shopping: 30,
+          transport: 15,
+          mood: 8.7,
+          dailyBudget: 800,
+          totalBudget: 3000,
+          spent: 2186
+        };
+        
+        function updateStatsData(isToday) {
+          const data = isToday ? todayData : totalData;
+          const period = isToday ? '今日' : '总计';
+          
+          // 更新标题
+          statsTitle.textContent = `${period}消费分析`;
+          moodTitle.textContent = `${period}心情曲线`;
+          budgetTitle.textContent = `${period}预算进度`;
+          
+          // 更新按钮状态
+          if (isToday) {
+            statsTodayBtn.className = 'px-3 py-1 text-sm font-medium text-white bg-primary-500 rounded-lg transition-all';
+            statsTotalBtn.className = 'px-3 py-1 text-sm font-medium text-slate-600 transition-all';
+          } else {
+            statsTodayBtn.className = 'px-3 py-1 text-sm font-medium text-slate-600 transition-all';
+            statsTotalBtn.className = 'px-3 py-1 text-sm font-medium text-white bg-primary-500 rounded-lg transition-all';
+          }
+          
+          // 更新数据（这里可以添加更多动态更新逻辑）
+          console.log(`切换到${period}数据:`, data);
+        }
+        
+        // 绑定事件
+        statsTodayBtn.addEventListener('click', () => updateStatsData(true));
+        statsTotalBtn.addEventListener('click', () => updateStatsData(false));
+        
+        // 初始化
+        updateStatsData(true);
+      })();
+
+      // AI旅行总结功能
+      (function() {
+        const regenerateBtn = document.getElementById('regenerate-ai-btn');
+        const aiSummaryContent = document.getElementById('ai-summary-content');
+        
+        const aiSummaries = [
+          {
+            content: [
+              "这次京都之旅充满了惊喜！你在清水寺的时光特别美好，心情指数达到了9.5分。整体消费控制得很好，比预算节省了814元。",
+              "最难忘的瞬间是在%Arabica咖啡店，阳光穿过庭院的宁静时光。购物方面，和服体验是最大的消费，但绝对值得！"
+            ]
+          },
+          {
+            content: [
+              "京都的秋天真是太美了！你的心情一直保持在很高的水平，平均8.4分。在美食上的投入最多，但每一分钱都花得很值。",
+              "清水寺的纪念品购买记录显示你很喜欢手工艺品，这体现了你对当地文化的深度体验。"
+            ]
+          },
+          {
+            content: [
+              "从数据来看，这是一次非常成功的旅行！你的消费结构很合理，餐饮占42%，购物28%，交通16%。",
+              "心情曲线显示你在下午时光最愉快，建议下次旅行可以多安排一些下午的活动。"
+            ]
+          }
+        ];
+        
+        let currentSummaryIndex = 0;
+        
+        function generateAISummary() {
+          const summary = aiSummaries[currentSummaryIndex];
+          aiSummaryContent.innerHTML = summary.content.map(text => 
+            `<div class="p-3 bg-gradient-to-r from-primary-50 to-accent-50 rounded-xl">
+              <p class="text-sm text-slate-700">${text}</p>
+            </div>`
+          ).join('');
+          
+          currentSummaryIndex = (currentSummaryIndex + 1) % aiSummaries.length;
+          
+          // 显示生成动画
+          regenerateBtn.innerHTML = '✨ 重新生成中...';
+          regenerateBtn.disabled = true;
+          
+          setTimeout(() => {
+            regenerateBtn.innerHTML = '重新生成总结';
+            regenerateBtn.disabled = false;
+          }, 2000);
+        }
+        
+        regenerateBtn.addEventListener('click', generateAISummary);
+      })();
+
+      // 分享功能
+      (function() {
+        const shareBtn = document.getElementById('share-trip-btn');
+        
+        shareBtn.addEventListener('click', () => {
+          // 模拟分享功能
+          shareBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5 animate-spin"><path fill="currentColor" d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"/></svg> 分享中...';
+          shareBtn.disabled = true;
+          
+          setTimeout(() => {
+            // 显示分享选项
+            showShareModal();
+            shareBtn.innerHTML = '<svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="currentColor" d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"/></svg> 分享快乐';
+            shareBtn.disabled = false;
+          }, 1500);
+        });
+        
+        function showShareModal() {
+          const modal = document.createElement('div');
+          modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-6';
+          modal.innerHTML = `
+            <div class="bg-white rounded-3xl p-6 max-w-sm w-full animate-slide-up">
+              <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                  <svg viewBox="0 0 24 24" class="w-8 h-8 text-white">
+                    <path fill="currentColor" d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"/>
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">分享你的快乐</h3>
+                <p class="text-sm text-slate-500">选择分享方式，让朋友们也感受你的旅行快乐</p>
+              </div>
+              <div class="space-y-3">
+                <button class="w-full flex items-center gap-3 p-3 bg-slate-50 rounded-2xl touch-feedback">
+                  <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 text-white">
+                      <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <div class="font-medium text-slate-900">微信</div>
+                    <div class="text-xs text-slate-500">分享到微信朋友圈</div>
+                  </div>
+                </button>
+                <button class="w-full flex items-center gap-3 p-3 bg-slate-50 rounded-2xl touch-feedback">
+                  <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 text-white">
+                      <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <div class="font-medium text-slate-900">微博</div>
+                    <div class="text-xs text-slate-500">分享到微博</div>
+                  </div>
+                </button>
+                <button class="w-full flex items-center gap-3 p-3 bg-slate-50 rounded-2xl touch-feedback">
+                  <div class="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 text-white">
+                      <path fill="currentColor" d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <div class="font-medium text-slate-900">小红书</div>
+                    <div class="text-xs text-slate-500">分享到小红书</div>
+                  </div>
+                </button>
+              </div>
+              <button onclick="this.closest('.fixed').remove()" class="w-full mt-6 py-3 text-slate-500 touch-feedback">
+                取消
+              </button>
+            </div>
+          `;
+          
+          document.body.appendChild(modal);
+          
+          // 点击背景关闭
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.remove();
+            }
+          });
+        }
+      })();
+
+      // 底部导航栏功能
+      (function() {
+        const navButtons = {
+          record: document.getElementById('nav-record'),
+          stats: document.getElementById('nav-stats'),
+          summary: document.getElementById('nav-summary'),
+          profile: document.getElementById('nav-profile')
+        };
+        
+        const panels = {
+          record: document.getElementById('panel-record'),
+          stats: document.getElementById('panel-stats'),
+          summary: document.getElementById('panel-summary'),
+          profile: document.getElementById('panel-profile')
+        };
+        
+        // 顶部tab已移除，不再需要
+        
+        function switchToTab(tabName) {
+          console.log(`切换到tab: ${tabName}`);
+          
+          // 隐藏所有面板
+          Object.values(panels).forEach(panel => {
+            if (panel) panel.classList.add('hidden');
+          });
+          
+          // 显示目标面板
+          if (panels[tabName]) {
+            panels[tabName].classList.remove('hidden');
+            console.log(`显示面板: ${tabName}`);
+          }
+          
+          // 控制信息卡片的显示（只在记录页面显示）
+          const infoCards = document.getElementById('info-cards');
+          if (infoCards) {
+            if (tabName === 'record') {
+              infoCards.style.display = 'grid';
+            } else {
+              infoCards.style.display = 'none';
+            }
+          }
+          
+          // 顶部tab已移除，不再需要更新
+          
+          // 更新底部导航样式
+          Object.entries(navButtons).forEach(([name, button]) => {
+            if (!button) return;
+            
+            // 直接获取第一个子元素（背景div）
+            const bg = button.children[0];
+            const icon = bg ? bg.querySelector('svg') : null;
+            const text = button.querySelector('span');
+            
+            console.log(`更新底部导航: ${name}, bg元素:`, bg, '按钮子元素数量:', button.children.length);
+            
+            if (name === tabName) {
+              // 激活状态
+              if (bg) {
+                bg.className = 'w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center';
+                // 确保图标颜色正确
+                const icon = bg.querySelector('svg');
+                if (icon) {
+                  icon.className = 'w-4 h-4 text-white';
+                }
+              }
+              if (text) {
+                text.className = 'text-xs text-primary-600 font-medium';
+              }
+            } else {
+              // 非激活状态
+              if (bg) {
+                bg.className = 'w-6 h-6 text-slate-400';
+                // 确保图标颜色正确
+                const icon = bg.querySelector('svg');
+                if (icon) {
+                  icon.className = 'w-6 h-6 text-slate-400';
+                }
+              }
+              if (text) {
+                text.className = 'text-xs text-slate-400';
+              }
+            }
+          });
+          
+          // tab指示器已移除，不再需要更新
+        }
+        
+        // 绑定点击事件
+        Object.entries(navButtons).forEach(([name, button]) => {
+          if (button) {
+            console.log(`绑定点击事件: ${name}`, button);
+            button.addEventListener('click', () => {
+              console.log(`点击了底部导航: ${name}`);
+              switchToTab(name);
+            });
+          } else {
+            console.error(`找不到按钮: ${name}`);
+          }
+        });
+        
+        // 顶部tab已移除，不再需要绑定事件
+        
+        // 旅行记忆图功能
+        function initTravelMemoryMap() {
+          // 旅行记忆数据
+          const memoryData = {
+            1: {
+              date: '2024年10月12日',
+              location: '清水寺',
+              mood: 9.2,
+              expenses: 850,
+              highlights: [
+                '在清水寺购买了纪念品',
+                '体验了传统和服',
+                '品尝了抹茶和点心',
+                '拍摄了美丽的夕阳照片'
+              ],
+              photos: 12,
+              records: 5
+            },
+            2: {
+              date: '2024年10月13日',
+              location: '祇园',
+              mood: 8.5,
+              expenses: 680,
+              highlights: [
+                '参观了祇园花见小路',
+                '品尝了正宗日式料理',
+                '观看了传统艺伎表演',
+                '购买了精美的手工艺品'
+              ],
+              photos: 8,
+              records: 4
+            },
+            3: {
+              date: '2024年10月14日',
+              location: '金阁寺',
+              mood: 8.8,
+              expenses: 656,
+              highlights: [
+                '参观了金阁寺的美丽建筑',
+                '在庭院中享受宁静时光',
+                '品尝了寺庙的素食料理',
+                '购买了护身符和纪念品'
+              ],
+              photos: 15,
+              records: 6
+            }
+          };
+
+          // 绑定点击事件
+          document.addEventListener('click', (e) => {
+            const memoryDay = e.target.closest('.memory-day');
+            if (memoryDay) {
+              const day = memoryDay.dataset.day;
+              showMemoryDetail(memoryData[day]);
+            }
+          });
+        }
+
+        // 显示记忆详情弹窗
+        function showMemoryDetail(data) {
+          const modal = document.createElement('div');
+          modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4';
+          modal.innerHTML = `
+            <div class="bg-white rounded-3xl p-6 w-full max-w-sm max-h-[80vh] overflow-y-auto">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-slate-900">${data.date}</h3>
+                <button onclick="this.closest('.fixed').remove()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="w-4 h-4 text-slate-500">
+                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                  </svg>
+                </button>
+              </div>
+              
+              <div class="space-y-4">
+                <!-- 地点和心情 -->
+                <div class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-2xl p-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                      <svg viewBox="0 0 24 24" class="w-5 h-5 text-primary-600">
+                        <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                      </svg>
+                      <span class="font-medium text-slate-900">${data.location}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                      <svg viewBox="0 0 24 24" class="w-4 h-4 text-mood-love">
+                        <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                      <span class="font-semibold text-mood-love">${data.mood}</span>
+                    </div>
+                  </div>
+                  <div class="text-sm text-slate-600">心情指数</div>
+                </div>
+
+                <!-- 花费统计 -->
+                <div class="bg-slate-50 rounded-2xl p-4">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="font-medium text-slate-900">当日花费</span>
+                    <span class="text-lg font-bold text-slate-900">¥${data.expenses}</span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-3 text-center">
+                    <div>
+                      <div class="text-sm font-medium text-slate-900">${data.photos}</div>
+                      <div class="text-xs text-slate-500">照片数</div>
+                    </div>
+                    <div>
+                      <div class="text-sm font-medium text-slate-900">${data.records}</div>
+                      <div class="text-xs text-slate-500">记录数</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 精彩瞬间 -->
+                <div>
+                  <h4 class="font-medium text-slate-900 mb-3">精彩瞬间</h4>
+                  <div class="space-y-2">
+                    ${data.highlights.map(highlight => `
+                      <div class="flex items-start gap-2 p-2 bg-slate-50 rounded-xl">
+                        <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <span class="text-sm text-slate-700">${highlight}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          document.body.appendChild(modal);
+          
+          // 点击背景关闭
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.remove();
+            }
+          });
+        }
+
+        // 初始化旅行记忆图功能
+        initTravelMemoryMap();
+        
+        // 旅行报告功能
+        function initTravelReport() {
+          // 旅行报告数据
+          const reportData = {
+            cover: {
+              title: "你的京都之旅",
+              subtitle: "2024年10月12日 - 10月14日",
+              totalDays: 3,
+              totalExpense: 2186,
+              avgMood: 8.4,
+              totalPhotos: 35,
+              totalRecords: 15
+            },
+            pages: [
+              {
+                type: "start",
+                title: "旅程开始",
+                content: "2024年10月12日，你踏上了前往京都的旅程",
+                emotion: "期待",
+                color: "from-mood-happy to-mood-joy"
+              },
+              {
+                type: "highlight",
+                title: "最难忘的瞬间",
+                content: "在清水寺的夕阳下，你感受到了前所未有的宁静",
+                emotion: "感动",
+                color: "from-mood-love to-accent-500",
+                details: {
+                  location: "清水寺",
+                  time: "傍晚时分",
+                  mood: 9.2,
+                  photo: "🌅"
+                }
+              },
+              {
+                type: "emotion",
+                title: "情绪波动",
+                content: "你的心情像过山车一样起伏，但始终保持着积极的态度",
+                emotion: "复杂",
+                color: "from-mood-calm to-mood-excited",
+                chart: {
+                  morning: 7.2,
+                  noon: 8.1,
+                  afternoon: 9.2,
+                  evening: 8.5
+                }
+              },
+              {
+                type: "spending",
+                title: "消费分析",
+                content: "你是一个理性的旅行者，每一分钱都花得很有意义",
+                emotion: "满足",
+                color: "from-primary-500 to-accent-500",
+                breakdown: {
+                  food: 42,
+                  shopping: 28,
+                  transport: 16,
+                  others: 14
+                }
+              },
+              {
+                type: "ai_summary",
+                title: "AI为你总结",
+                content: "这次旅行让你重新认识了生活的美好，每一个瞬间都值得珍藏",
+                emotion: "温暖",
+                color: "from-mood-wonder to-primary-500",
+                insights: [
+                  "你在旅行中展现出了很好的适应能力",
+                  "对美的感知力特别强，总是能发现生活中的小确幸",
+                  "消费习惯很健康，既享受了旅行又控制了预算"
+                ]
+              },
+              {
+                type: "end",
+                title: "旅程结束",
+                content: "但美好的回忆将永远伴随着你",
+                emotion: "不舍",
+                color: "from-mood-love to-mood-happy"
+              }
+            ]
+          };
+
+          // 绑定生成报告按钮
+          const generateBtn = document.getElementById('generate-travel-report-btn');
+          if (generateBtn) {
+            generateBtn.addEventListener('click', () => {
+              showTravelReport(reportData);
+            });
+          }
+        }
+
+        // 显示旅行报告
+        function showTravelReport(data) {
+          const modal = document.createElement('div');
+          modal.className = 'fixed inset-0 bg-black/90 flex items-center justify-center z-50';
+          modal.innerHTML = `
+            <div class="w-full h-full max-w-sm bg-white relative overflow-hidden">
+              <!-- 报告容器 -->
+              <div id="report-container" class="w-full h-full relative">
+                <!-- 报告页面将通过JavaScript动态生成 -->
+              </div>
+              
+              <!-- 导航控制 -->
+              <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
+                <button id="prev-page" class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5">
+                    <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                  </svg>
+                </button>
+                <div class="flex gap-2">
+                  ${data.pages.map((_, index) => `
+                    <div class="w-2 h-2 rounded-full bg-white/30 page-indicator" data-page="${index}"></div>
+                  `).join('')}
+                </div>
+                <button id="next-page" class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white">
+                  <svg viewBox="0 0 24 24" class="w-5 h-5">
+                    <path fill="currentColor" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                  </svg>
+                </button>
+              </div>
+              
+              <!-- 关闭按钮 -->
+              <button id="close-report" class="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white">
+                <svg viewBox="0 0 24 24" class="w-4 h-4">
+                  <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+              </button>
+            </div>
+          `;
+          
+          document.body.appendChild(modal);
+          
+          // 报告状态
+          let currentPage = 0;
+          const totalPages = data.pages.length;
+          
+          // 渲染当前页面
+          function renderPage(pageIndex) {
+            const container = document.getElementById('report-container');
+            const page = data.pages[pageIndex];
+            
+            if (pageIndex === 0) {
+              // 封面页
+              container.innerHTML = `
+                <div class="w-full h-full bg-gradient-to-br ${page.color} flex flex-col items-center justify-center text-white p-8 relative overflow-hidden">
+                  <!-- 背景装饰 -->
+                  <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>
+                  <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-24 -translate-x-24"></div>
+                  
+                  <div class="text-center z-10">
+                    <div class="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                      <svg viewBox="0 0 24 24" class="w-10 h-10">
+                        <path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/>
+                      </svg>
+                    </div>
+                    <h1 class="text-3xl font-bold mb-2">${data.cover.title}</h1>
+                    <p class="text-lg opacity-90 mb-8">${data.cover.subtitle}</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                      <div>
+                        <div class="text-2xl font-bold">${data.cover.totalDays}</div>
+                        <div class="text-sm opacity-80">旅行天数</div>
+                      </div>
+                      <div>
+                        <div class="text-2xl font-bold">¥${data.cover.totalExpense}</div>
+                        <div class="text-sm opacity-80">总花费</div>
+                      </div>
+                      <div>
+                        <div class="text-2xl font-bold">${data.cover.avgMood}</div>
+                        <div class="text-sm opacity-80">平均心情</div>
+                      </div>
+                      <div>
+                        <div class="text-2xl font-bold">${data.cover.totalPhotos}</div>
+                        <div class="text-sm opacity-80">照片数</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            } else {
+              // 内容页
+              container.innerHTML = `
+                <div class="w-full h-full bg-gradient-to-br ${page.color} flex flex-col items-center justify-center text-white p-8 relative overflow-hidden">
+                  <!-- 背景装饰 -->
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                  <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
+                  
+                  <div class="text-center z-10 max-w-xs">
+                    <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                      ${getPageIcon(page.type)}
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4">${page.title}</h2>
+                    <p class="text-lg opacity-90 mb-6">${page.content}</p>
+                    
+                    ${renderPageContent(page)}
+                    
+                    <div class="mt-6">
+                      <div class="text-sm opacity-80">情绪标签</div>
+                      <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-medium mt-2">
+                        ${page.emotion}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }
+            
+            // 更新页面指示器
+            document.querySelectorAll('.page-indicator').forEach((indicator, index) => {
+              if (index === pageIndex) {
+                indicator.className = 'w-2 h-2 rounded-full bg-white page-indicator';
+              } else {
+                indicator.className = 'w-2 h-2 rounded-full bg-white/30 page-indicator';
+              }
+            });
+          }
+          
+          // 获取页面图标
+          function getPageIcon(type) {
+            const icons = {
+              start: '<svg viewBox="0 0 24 24" class="w-8 h-8"><path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/></svg>',
+              highlight: '<svg viewBox="0 0 24 24" class="w-8 h-8"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>',
+              emotion: '<svg viewBox="0 0 24 24" class="w-8 h-8"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>',
+              spending: '<svg viewBox="0 0 24 24" class="w-8 h-8"><path fill="currentColor" d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7M9 3V4H15V3H9M7 6V19H17V6H7M9 8H11V17H9V8M13 8H15V17H13V8Z"/></svg>',
+              ai_summary: '<svg viewBox="0 0 24 24" class="w-8 h-8"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>',
+              end: '<svg viewBox="0 0 24 24" class="w-8 h-8"><path fill="currentColor" d="M12 2l3.5 7.1L23 9.3l-5.5 5.4L18.9 22 12 18.2 5.1 22l1.4-7.3L1 9.3l7.5-1.2L12 2z"/></svg>'
+            };
+            return icons[type] || icons.start;
+          }
+          
+          // 渲染页面特定内容
+          function renderPageContent(page) {
+            switch (page.type) {
+              case 'highlight':
+                return `
+                  <div class="bg-white/20 rounded-2xl p-4 mb-4">
+                    <div class="text-sm opacity-80 mb-2">📍 ${page.details.location}</div>
+                    <div class="text-sm opacity-80 mb-2">⏰ ${page.details.time}</div>
+                    <div class="text-sm opacity-80 mb-2">😊 心情指数 ${page.details.mood}</div>
+                    <div class="text-2xl">${page.details.photo}</div>
+                  </div>
+                `;
+              case 'emotion':
+                return `
+                  <div class="bg-white/20 rounded-2xl p-4 mb-4">
+                    <div class="flex justify-between items-end h-16 mb-2">
+                      <div class="flex flex-col items-center">
+                        <div class="w-2 h-8 bg-white rounded-t" style="height: ${page.chart.morning * 8}px;"></div>
+                        <div class="text-xs mt-1">早上</div>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <div class="w-2 h-10 bg-white rounded-t" style="height: ${page.chart.noon * 8}px;"></div>
+                        <div class="text-xs mt-1">中午</div>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <div class="w-2 h-12 bg-white rounded-t" style="height: ${page.chart.afternoon * 8}px;"></div>
+                        <div class="text-xs mt-1">下午</div>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <div class="w-2 h-9 bg-white rounded-t" style="height: ${page.chart.evening * 8}px;"></div>
+                        <div class="text-xs mt-1">晚上</div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              case 'spending':
+                return `
+                  <div class="bg-white/20 rounded-2xl p-4 mb-4">
+                    <div class="space-y-2">
+                      <div class="flex justify-between">
+                        <span class="text-sm">🍽️ 餐饮</span>
+                        <span class="text-sm font-medium">${page.breakdown.food}%</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-sm">🛍️ 购物</span>
+                        <span class="text-sm font-medium">${page.breakdown.shopping}%</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-sm">🚗 交通</span>
+                        <span class="text-sm font-medium">${page.breakdown.transport}%</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-sm">🎯 其他</span>
+                        <span class="text-sm font-medium">${page.breakdown.others}%</span>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              case 'ai_summary':
+                return `
+                  <div class="bg-white/20 rounded-2xl p-4 mb-4">
+                    <div class="space-y-2">
+                      ${page.insights.map(insight => `
+                        <div class="flex items-start gap-2">
+                          <div class="w-1 h-1 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                          <span class="text-sm">${insight}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              default:
+                return '';
+            }
+          }
+          
+          // 事件绑定
+          document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 0) {
+              currentPage--;
+              renderPage(currentPage);
+            }
+          });
+          
+          document.getElementById('next-page').addEventListener('click', () => {
+            if (currentPage < totalPages - 1) {
+              currentPage++;
+              renderPage(currentPage);
+            }
+          });
+          
+          document.getElementById('close-report').addEventListener('click', () => {
+            modal.remove();
+          });
+          
+          // 点击背景关闭
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.remove();
+            }
+          });
+          
+          // 初始化渲染
+          renderPage(0);
+        }
+
+        // 初始化旅行报告功能
+        initTravelReport();
+        
+        // 初始化
+        switchToTab('record');
+      })();
+    </script>
+  </body>
+</html>
